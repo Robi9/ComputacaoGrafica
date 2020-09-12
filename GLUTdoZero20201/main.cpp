@@ -25,7 +25,6 @@ using namespace std;
 
 int indice;
 std::vector<objeto*> vetorObjetos;
-bool desenhaObjeto = false;
 
 void atualizaVetorObjetos();
 void desenhaVetorObjetos();
@@ -58,7 +57,6 @@ int last_pick = TRANSLATE;
 
 
 Model3DS modelo3ds = Model3DS("../3ds/cartest.3DS");
-Model3DS mesaC = Model3DS("../3ds/mesaC/mesaC/mesaC.3ds");
 
 void desenha() {
     GUI::displayInit();
@@ -67,7 +65,7 @@ void desenha() {
         glScalef(0,0,0);
         GUI::draw3ds(modelo3ds);
     glPopMatrix();
-   // GUI::draw3ds(mesaC);
+   
     GUI::setLight(0, 0,2,0, true, false);
 
     //referencia (sistema de coordenadas global)    
@@ -238,9 +236,6 @@ void teclado(unsigned char tecla, int x, int y) {
     case 'p':
         addObjeto(1); //chama adição do PC
         break;
-    case 't':
-        glutGUI::trans_obj = !glutGUI::trans_obj;
-        break;
     case 'm':
         addObjeto(2); //chama adição da mesa
         break;
@@ -358,7 +353,6 @@ void desenhaVetorObjetos(){
         if(i==indice){
            glScalef(vetorObjetos[i]->get_x_scale()+0.2,vetorObjetos[i]->get_y_scale()+0.2,vetorObjetos[i]->get_z_scale()+0.2);
         }
-        if(desenhaObjeto) GUI::drawOrigin(0.2);
         vetorObjetos[i]->desenha();
         glPopMatrix();
     }
@@ -450,7 +444,7 @@ void cena(){
     objeto* pc2 =  new pc(-2.4, 1.63913e-08, -2.3, 0,0, 0, 0.75, 0.75, 0.7,false, false);
     objeto* pc3 =  new pc(0.8, 1.49012e-09, 1.6, 0, 0, 0, 0.75, 0.75, 0.7,false, false);
     objeto* pc4 =  new pc(0.8, 1.63913e-08, -2.1, 0, 0, 0, 0.75, 0.75, 0.7,false, false);
-    objeto* mesa1 =  new mesa(-0.4, 1.3411e-08, 2.5, 0, 0, 0, 1, 1.05, 1.1,false, false);//(1,-2,5,0,0,0,2,2,2,false);
+    objeto* mesa1 =  new mesa(-0.4, 1.3411e-08, 2.5, 0, 0, 0, 1, 1.05, 1.1,false, false);
     objeto* cadeira1 =  new cadeira(0.8, 0.2, -1.2, 2, 88, 0, 1, 1, 1,false, false);
     objeto* cadeira3 =  new cadeira(1.6, 1.49012e-09, 0.6, 0, 0, 0, 1, 1, 1,false, false);
     objeto* cadeira2 =  new cadeira(-0.3, 0.2, 1.5, -2, -90, 0, 1, 1, 1,false, false);
@@ -479,4 +473,3 @@ int main()
     GUI gui = GUI(800,600,desenha,teclado,mouse);
 }
 
-//glutGUI::trans_luz = !glutGUI::trans_luz;
