@@ -122,12 +122,6 @@ float objeto::get_z_scale(){
     return this->objez;
 }
 
-string float_to_string(float number){
-    ostringstream ss;
-    ss<<number;
-    string s = ss.str();
-    return s;
-}
 istream& operator >> (istream& is,objeto& obj){
     is>>obj.objtx;
     is>>obj.objty;
